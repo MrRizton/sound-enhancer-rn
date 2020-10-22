@@ -5,6 +5,6 @@ export interface ISetFileAction extends Action<typeof SetFileActionType> {
   file: string;
 }
 
-type EnhancerAction = ISetFileAction;
+type EnhancerAction = ISetFileAction | any;
 
 export default EnhancerAction;

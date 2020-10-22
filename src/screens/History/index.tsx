@@ -6,7 +6,7 @@ import styles from './styles';
 const History: React.FC = () => {
   return (
     <ScrollView>
-      <Text style={styles.title}>Welcome Back</Text>
+      <Text style={styles.title}>Your history</Text>
     </ScrollView>
   );
 };

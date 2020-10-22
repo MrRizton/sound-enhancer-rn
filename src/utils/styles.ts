@@ -4,7 +4,6 @@ import colors from './colors';
 const styles = StyleSheet.create({
   tabBar: {
     borderTopWidth: 0,
-    backgroundColor: colors.main.background,
   },
   safeAreaProvider: {
     flex: 1,

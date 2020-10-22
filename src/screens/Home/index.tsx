@@ -1,12 +1,23 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {Text} from 'react-native-paper';
+import {ScrollView, TouchableOpacity} from 'react-native';
+import {Card, IconButton, Text} from 'react-native-paper';
 import styles from './styles';
 
 const Home: React.FC = () => {
   return (
-    <ScrollView>
-      <Text style={styles.title}>Welcome Back</Text>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.scrollViewContentContainer}>
+      <Text style={styles.title}>Welcome Home</Text>
+      <Card>
+        <Card.Title title="Let's enhance another audio" />
+        <Card.Content>
+          <TouchableOpacity style={styles.tileContent} onPress={() => {}}>
+            <IconButton icon="plus" />
+            <Text>Choose the file to edit</Text>
+          </TouchableOpacity>
+        </Card.Content>
+      </Card>
     </ScrollView>
   );
 };
