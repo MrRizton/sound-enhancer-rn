@@ -46,14 +46,18 @@ const HomeTabNavigator = () => {
     },
     tabBarLabel: ({focused}) => {
       return (
-        <Text
-          style={{
-            color: focused ? colors.main.onSecondary : colors.main.onBackground,
-            fontFamily: FONT_WEIGHT.regular,
-            fontSize: FONT_SIZE.small,
-          }}>
-          {route.name}
-        </Text>
+        focused && (
+          <Text
+            style={{
+              color: focused
+                ? colors.main.onSecondary
+                : colors.main.onBackground,
+              fontFamily: FONT_WEIGHT.regular,
+              fontSize: FONT_SIZE.small,
+            }}>
+            {route.name}
+          </Text>
+        )
       );
     },
   });

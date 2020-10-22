@@ -13,10 +13,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
+  },
+  addContent: {
     borderColor: colors.main.onSurface,
     borderWidth: 2,
     borderStyle: 'dashed',
     borderRadius: 16,
+  },
+  fileName: {
+    textAlign: 'center',
+    fontFamily: FONT_WEIGHT.bold,
+    fontSize: FONT_SIZE.large,
+    marginBottom: 16,
+  },
+  fileStatsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  fileStats: {
+    fontFamily: FONT_WEIGHT.regular,
+    fontSize: FONT_SIZE.small,
   },
   title: {
     marginVertical: 24,
