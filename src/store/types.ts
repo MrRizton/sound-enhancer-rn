@@ -1,7 +1,8 @@
+import {DocumentPickerResponse} from 'react-native-document-picker';
 import {Action, AnyAction} from 'redux';
 
 export interface IEnhancerState {
-  file?: string;
+  file?: DocumentPickerResponse;
 }
 
 export type State = {

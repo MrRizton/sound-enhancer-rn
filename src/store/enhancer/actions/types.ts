@@ -1,10 +1,13 @@
-import {SetFileActionType} from './actionTypes';
+import {OnFilePickStartActionType, SetFileActionType} from './actionTypes';
 import {Action} from 'redux';
+import {DocumentPickerResponse} from 'react-native-document-picker';
 
 export interface ISetFileAction extends Action<typeof SetFileActionType> {
-  file: string;
+  file: DocumentPickerResponse;
 }
 
-type EnhancerAction = ISetFileAction | any;
+export type IOnFilePickStartAction = Action<typeof OnFilePickStartActionType>;
+
+type EnhancerAction = ISetFileAction | IOnFilePickStartAction;
 
 export default EnhancerAction;
