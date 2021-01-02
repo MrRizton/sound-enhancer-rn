@@ -1,6 +1,6 @@
-import {SetFileActionType} from './actions/actionTypes';
+import {RemoveFileActionType, SetFileActionType} from './actions/actionTypes';
 import EnhancerAction from './actions/types';
-import {SetFileMiddleware} from './middleware';
+import {setFileMiddleware, removeMiddleware} from './middleware';
 import {Reducer} from 'redux';
 import {IEnhancerState} from '../types';
 
@@ -12,7 +12,9 @@ const enhancer: Reducer<IEnhancerState, EnhancerAction> = (
 ) => {
   switch (action.type) {
     case SetFileActionType:
-      return SetFileMiddleware(state, action);
+      return setFileMiddleware(state, action);
+    case RemoveFileActionType:
+      return removeMiddleware(state, action);
     default:
       return state;
   }

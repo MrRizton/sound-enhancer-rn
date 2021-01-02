@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.grand,
     alignSelf: 'center',
   },
+  button: {
+    backgroundColor: colors.main.primary,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  }
 });
 
 export default styles;

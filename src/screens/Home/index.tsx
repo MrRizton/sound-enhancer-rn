@@ -1,12 +1,13 @@
 import React, {useCallback} from 'react';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
-import {Card, IconButton, Text} from 'react-native-paper';
+import {ScrollView} from 'react-native';
+import {Text} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {onFilePickStartAction} from '../../store/enhancer/actions';
+import FileCard from '../../components/FileCard';
+import AudioProcessor from '../../nativeModules/react-native-audio-processor';
+import {onFilePickStartAction, removeFileAction} from '../../store/enhancer/actions';
+import {updateHistoryAction} from '../../store/history/actions';
 import {State} from '../../store/types';
 import styles from './styles';
-import _ from 'lodash';
-import {Player} from '../../components';
 
 const Home: React.FC = () => {
   const file = useSelector((state: State) => state.enhancer.file);
@@ -16,38 +17,45 @@ const Home: React.FC = () => {
     dispatch(onFilePickStartAction());
   }, []);
 
-  console.log(file?.uri);
+  const addToHistory = () => {
+    dispatch(updateHistoryAction({file, options: {}}));
+  };
+
+  const onError = useCallback(() => {
+    console.log('onError: error occured in native code');
+    addToHistory();
+  }, [addToHistory]);
+
+  const onSuccess = useCallback(
+    (value) => {
+      console.log('onSuccess: ', value);
+      addToHistory();
+    },
+    [addToHistory],
+  );
+
+  const onProcessPress = useCallback(() => {
+    if (file) {
+      AudioProcessor.processAudio(file.uri, onSuccess, onError);
+    }
+  }, [file]);
+
+  const onRemoveFile = useCallback(() => {
+    dispatch(removeFileAction());
+  }, []);
+
+  console.log(file);
   return (
     <ScrollView
       style={styles.scrollView}
       contentContainerStyle={styles.scrollViewContentContainer}>
       <Text style={styles.title}>Welcome Home</Text>
-      <Card>
-        <Card.Title title="Let's enhance another audio" />
-        <Card.Content>
-          {file ? (
-            <View>
-              <Text style={styles.fileName}>{file.name}</Text>
-              <View style={styles.fileStatsContainer}>
-                <Text style={styles.fileStats}>{`File size: ${_.round(
-                  file.size / 1000000,
-                  2,
-                )} MB`}</Text>
-                <Text
-                  style={styles.fileStats}>{`File type: ${file.type}`}</Text>
-              </View>
-              <Player uri={`${file.uri}`} type={file.type} />
-            </View>
-          ) : (
-            <TouchableOpacity
-              style={[styles.tileContent, styles.addContent]}
-              onPress={onOpenPickerPress}>
-              <IconButton icon="plus" />
-              <Text>Choose the file to edit</Text>
-            </TouchableOpacity>
-          )}
-        </Card.Content>
-      </Card>
+      <FileCard
+        file={file}
+        onProcessPress={onProcessPress}
+        onOpenPickerPress={onOpenPickerPress}
+        onRemoveFile={onRemoveFile}
+      />
     </ScrollView>
   );
 };

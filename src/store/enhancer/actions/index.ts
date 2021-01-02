@@ -1,5 +1,13 @@
-import {OnFilePickStartActionType, SetFileActionType} from './actionTypes';
-import {IOnFilePickStartAction, ISetFileAction} from './types';
+import {
+  OnFilePickStartActionType,
+  RemoveFileActionType,
+  SetFileActionType,
+} from './actionTypes';
+import {
+  IOnFilePickStartAction,
+  IRemoveFileAction,
+  ISetFileAction,
+} from './types';
 import {ActionCreator} from 'redux';
 import {DocumentPickerResponse} from 'react-native-document-picker';
 
@@ -12,4 +20,8 @@ export const setFileAction: ActionCreator<ISetFileAction> = (
 
 export const onFilePickStartAction: ActionCreator<IOnFilePickStartAction> = () => ({
   type: OnFilePickStartActionType,
+});
+
+export const removeFileAction: ActionCreator<IRemoveFileAction> = () => ({
+  type: RemoveFileActionType,
 });

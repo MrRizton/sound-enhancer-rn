@@ -1,6 +1,12 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {applyMiddleware, createStore} from 'redux';
-import {PersistConfig, persistReducer, persistStore} from 'redux-persist';
+import {
+  createMigrate,
+  MigrationManifest,
+  PersistConfig,
+  persistReducer,
+  persistStore,
+} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from '../saga';
 import rootReducer from './store';
@@ -12,7 +18,7 @@ const persistConfig: PersistConfig<State> = {
   key: 'root',
   version: 0,
   storage: AsyncStorage,
-  whitelist: [],
+  whitelist: ['enhancer', 'history'],
   debug: true,
 };
 
